@@ -15,9 +15,7 @@ export class StudentListComponent {
   selectedAbsentStudents: string[] = [];
   
   
-  
-  
-  getAbsentStudents() {
+getAbsentStudents() {
     this.selectedAbsentStudents.push(this.selectedStudent);
     this.selectedStudent = ''; 
     let newAbsentStudents: string[] = this.selectedAbsentStudents.slice();
@@ -36,4 +34,26 @@ export class StudentListComponent {
     });
     console.log(newPresentStudents);
   }
+   // Filtrer les garçons de la liste des étudiants absents
+   getPresentBoyStudents(): string[] {
+    const presentBoyStudents = this.selectedAbsentStudents.filter(student => {
+      return this.students.find(s => s.prenom === student && s.type === 'garçon');
+    }).map(student => {
+      return student;
+    });
+
+    return presentBoyStudents || [];
+  }
+
+  getPresentGirlStudents(): string[] {
+    const presentGirlStudents = this.selectedAbsentStudents.filter(student => {
+      return this.students.find(s => s.prenom === student && s.type === 'fille');
+    }).map(student => {
+      return student;
+    });
+
+    return presentGirlStudents || [];
+  }
 }
+
+
