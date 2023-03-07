@@ -1,1 +1,50 @@
-<app-student-list></app-student-list>
+<section>
+    <span class="vertical-line"></span>
+    <form>
+      <label for="student">Ajouter un.e absent.e</label>
+      <select id="student" name="student" [(ngModel)]="selectedStudent">
+        <option value="" disabled selected hidden>Sélectionnez une option</option>
+        <option
+          *ngFor="let student of students; let i = index"
+          [ngValue]="student.prenom"
+        >
+          {{ student.prenom }}
+        </option>
+      </select>
+      <br /><br />
+    </form>
+    <button type="submit" (click)="getAbsentStudents()">{{ titre }}</button>
+    <h3>Liste des absents</h3>
+    <ul>
+      <ng-container *ngFor="let student of selectedAbsentStudents">
+        <li *ngIf="getAbsentBoyStudents().includes(student)">
+          <!--  .includes(student)" est une méthode qui permet de vérifier si un élément 
+           est présent dans un tableau.-->
+          {{ student }}
+          <span (click)="removeAbsentStudent(student)"> x </span>
+        </li></ng-container
+      >
+    </ul>
+    <h3>Liste des absentes</h3>
+    <ul>
+    <ng-container *ngFor="let student of selectedAbsentStudents">
+        <li *ngIf="getAbsentGirlStudents().includes(student)">
+          {{ student }}
+          <span (click)="removeAbsentStudent(student)"> x </span>
+        </li>
+    </ng-container>
+    </ul>
+    <ul>
+        <li *ngFor= "let student of presentStudents"> {{ student }}</li>
+    </ul>
+    <button type="submit" (click)="getPresentStudents()">add</button>
+    </section>
+  
+  <!-- button qui efface input: 
+      ajouter dans ts: myInputValue = ''; // déclaration et initialisation de la propriété
+      clearInput(): void { // fonction pour effacer la valeur de la propriété
+      this.myInputValue = '';
+    }
+      <input type="text" [(ngModel)]="myInputValue">
+      <button (click)="clearInput()">Effacer</button> -->
+  
