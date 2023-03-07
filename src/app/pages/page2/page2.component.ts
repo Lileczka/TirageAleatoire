@@ -8,8 +8,8 @@ import { StudentService } from 'src/app/student.service';
 })
 export class Page2Component {
   students = STUDENTS; //students egal à mock
+  titre= 'Ajouter';
   
-  titre= "ajouter";
   
   selectedStudent = '';
   selectedAbsentStudents: string[] = [];
@@ -32,7 +32,9 @@ export class Page2Component {
   getPresentStudents(): void {
     this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
     console.log(this.presentStudents);
+    // Convertir la liste newPresentStudents en chaîne de caractères JSON
     const presentStudentsJson = JSON.stringify(this.presentStudents);
+    // Stocker la chaîne JSON dans localStorage avec la clé "presentStudents"
     localStorage.setItem("presentMemoryStudents", presentStudentsJson);
   }
 

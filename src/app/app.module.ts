@@ -7,6 +7,7 @@ import { Page2Component } from './pages/page2/page2.component';
 import { Page1Component } from './pages/page1/page1.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { StudentService } from './student.service';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ ],
+  providers: [ StudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

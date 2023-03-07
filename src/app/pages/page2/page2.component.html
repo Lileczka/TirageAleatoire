@@ -1,20 +1,25 @@
 <section>
+  <div class="container">
     <span class="vertical-line"></span>
-    <form>
-      <label for="student">Ajouter un.e absent.e</label>
-      <select id="student" name="student" [(ngModel)]="selectedStudent">
-        <option value="" disabled selected hidden>Sélectionnez une option</option>
+    <div class="containerLeft">
+    <form class="formBlock">
+      <label for="student"><h3>Ajouter un.e absent.e</h3></label>
+      <select  id="student" name="student" [(ngModel)]="selectedStudent">
+        <option value="" disabled selected hidden>Sélectionnez une personne</option>
         <option
           *ngFor="let student of students; let i = index"
-          [ngValue]="student.prenom"
-        >
-          {{ student.prenom }}
+          [ngValue]="student.prenom">{{ student.prenom }}
         </option>
       </select>
-      <br /><br />
     </form>
-    <button type="submit" (click)="getAbsentStudents()">{{ titre }}</button>
-    <h3>Liste des absents</h3>
+    <br> <br> 
+   <button type="submit" (click)="getAbsentStudents()">{{ titre }}</button>
+    </div>
+    <br> <br> 
+    <div class="containerRight"> 
+    
+      <h3>Liste des absents</h3>
+    
     <ul>
       <ng-container *ngFor="let student of selectedAbsentStudents">
         <li *ngIf="getAbsentBoyStudents().includes(student)">
@@ -30,15 +35,21 @@
     <ng-container *ngFor="let student of selectedAbsentStudents">
         <li *ngIf="getAbsentGirlStudents().includes(student)">
           {{ student }}
-          <span (click)="removeAbsentStudent(student)"> x </span>
+          <span class="petitBtn" (click)="removeAbsentStudent(student)"> x </span>
         </li>
     </ng-container>
     </ul>
-    <ul>
-        <li *ngFor= "let student of presentStudents"> {{ student }}</li>
+  </div> 
+  </div>
+  </section>
+    <!--<ul>
+    <li *ngFor= "let student of presentStudents"> {{ student }}</li>
     </ul>
+  </div>
     <button type="submit" (click)="getPresentStudents()">add</button>
-    </section>
+     -->
+  
+
   
   <!-- button qui efface input: 
       ajouter dans ts: myInputValue = ''; // déclaration et initialisation de la propriété

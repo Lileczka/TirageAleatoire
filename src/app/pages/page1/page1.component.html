@@ -1,7 +1,11 @@
 <section>
-   
-  <div *ngFor="let student of presentStudents">{{student}}</div>
-  <button type="submit" (click)="getPresentStudents()">add</button>
-  
+  <div class="container">
+  <button type="button" (click)="getPresentStudents()">{{ titre }} </button>
+  <div class="selectionContainer">
+    <p *ngIf="cacheMoi">Personne n'a été sélectionné actuellement 👀</p>
+  <ul>
+  <li *ngFor= "let student of presentMemoryStudents">{{ student }}</li></ul>
+</div>
+</div>
 
 </section>

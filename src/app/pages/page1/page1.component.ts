@@ -18,25 +18,27 @@ export class Page1Component  {
   
   presentStudents: string[] = []; 
   selectedAbsentStudents: string[] = [];
+  presentMemoryStudents : string[] = [];
   
- 
   
   constructor(private studentService: StudentService) { 
     this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
   }
   
-getPresentStudents(): void {
+  getPresentStudents(): void {
+    this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
+    // Récupérer la chaîne JSON de localStorage avec la clé presentMemoryStudents
+    const presentStudentsJson = localStorage.getItem("presentMemoryStudents");
   
-  this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
-  const presentStudentsJson = localStorage.getItem("presentMemoryStudents");
-  if (presentStudentsJson !== null) {
-    const presentMemoryStudents = JSON.parse(presentStudentsJson);
-    console.log(presentMemoryStudents);
-  } else {
-    console.log("La valeur de presentMemoryStudents est null");
+    if (presentStudentsJson !== null) {
+      this.presentMemoryStudents = JSON.parse(presentStudentsJson);
+      console.log(this.presentMemoryStudents);
+    } else {
+      console.log("La valeur de presentMemoryStudents est null");
+    }
   }
 }
-}
+
 //this.cacheMoi=!this.cacheMoi
   //this.visible=!this.visible;
   
@@ -45,14 +47,7 @@ getPresentStudents(): void {
   
   
   
-  /*getPresentStudent() {
-    let newPresentStudents: string[] = this.students.filter(student => {
-      return this.selectedAbsentStudents.indexOf(student.prenom) === -1;
-    }).map(student => {
-      return student.prenom;
-    });
-    console.log('Lista'+ newPresentStudents);
-  } */
+  
   
   
   
