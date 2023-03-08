@@ -26,6 +26,25 @@ export class StudentService {
     }
   }
 
+  getAbsentBoyStudents(selectedAbsentStudents: string[]): string[] {
+    const absentBoyStudents = selectedAbsentStudents.filter(student => {
+      return this.students.find(s => s.prenom === student && s.type === 'garçon');
+    }).map(student => {
+      return student;
+    });
+    
+    return absentBoyStudents || []; 
+  }
+
+  getAbsentGirlStudents(selectedAbsentStudents: string[]): string[] {
+    const absentGirlStudents = selectedAbsentStudents.filter(student => {
+      return this.students.find(s => s.prenom === student && s.type === 'fille');
+    }).map(student => {
+      return student;
+    });
+   return absentGirlStudents || [];
+  }
+
   removeAbsentStudent(student: string, selectedAbsentStudents: string[]): string[] {
     const newAbsentStudents = selectedAbsentStudents.filter(s => s !== student);
     return newAbsentStudents;
@@ -35,28 +54,30 @@ export class StudentService {
     const newPresentStudents: string[] = this.students
       .filter(student => selectedAbsentStudents.indexOf(student.prenom) === -1)
       .map(student => student.prenom);
-      //console.log(newPresentStudents);
+      console.log(newPresentStudents);
     return newPresentStudents;
   }
-  
 
-
-  getAbsentBoyStudents(selectedAbsentStudents: string[]): string[] {
-    const absentBoyStudents = selectedAbsentStudents.filter(student => {
+  getPresentBoylStudents(newPresentStudents: string[]): string[] {
+    const presentBoyStudents = newPresentStudents.filter(student => {
       return this.students.find(s => s.prenom === student && s.type === 'garçon');
     }).map(student => {
-      return student;
+    return student;
     });
-    return absentBoyStudents || [];
+    return presentBoyStudents || [];
   }
 
-  getAbsentGirlStudents(selectedAbsentStudents: string[]): string[] {
-    const absentGirlStudents = selectedAbsentStudents.filter(student => {
+getPresentGirlStudents(newPresentStudents: string[]): string[] {
+    const presentGirlStudents = newPresentStudents.filter(student => {
       return this.students.find(s => s.prenom === student && s.type === 'fille');
     }).map(student => {
-      return student;
+    return student;
+      
     });
-    return absentGirlStudents || [];
+    console.log(presentGirlStudents);
+    return presentGirlStudents || [];
   }
+
+  
 }
 

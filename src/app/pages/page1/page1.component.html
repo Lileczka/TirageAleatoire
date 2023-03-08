@@ -1,11 +1,19 @@
 <section>
   <div class="container">
-  <button type="button" (click)="getPresentStudents()">{{ titre }} </button>
-  <div class="selectionContainer">
-    <p *ngIf="cacheMoi">Personne n'a été sélectionné actuellement 👀</p>
-  <ul>
-  <li *ngFor= "let student of presentMemoryStudents">{{ student }}</li></ul>
-</div>
-</div>
-
+    <button type="button" (click)="getRandomStudent()">{{ titre }}</button>
+    <div class="selectionContainer">
+    <h2 *ngIf="presentGirlStudents.includes(selectedStudent); else boy">
+      {{ selectedStudent }} 🌸
+    <p>tu es la grande gagnante !</p>
+    </h2>
+    <ng-template #boy>
+      <h2 *ngIf="presentBoyStudents.includes(selectedStudent); else neither">
+        {{ selectedStudent }} 🌺 
+        <p>tu es le grand gagnant !</p>
+      </h2>
+    </ng-template>
+    <ng-template #neither>
+      <p class="text">Personne n'est sélectionné actuellement 👀</p>
+    </ng-template>
+  </div></div>
 </section>

@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { StudentService } from './student.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,13 +18,15 @@ import { StudentService } from './student.service';
     Page1Component,
     HeaderComponent,
     FooterComponent,
+    
    
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    
   ],
   providers: [ StudentService],
   bootstrap: [AppComponent]

@@ -2,60 +2,61 @@
   <div class="container">
     <span class="vertical-line"></span>
     <div class="containerLeft">
-    <form class="formBlock">
-      <label for="student"><h3>Ajouter un.e absent.e</h3></label>
-      <select  id="student" name="student" [(ngModel)]="selectedStudent">
-        <option value="" disabled selected hidden>Sélectionnez une personne</option>
-        <option
-          *ngFor="let student of students; let i = index"
-          [ngValue]="student.prenom">{{ student.prenom }}
-        </option>
-      </select>
-    </form>
-    <br> <br> 
-   <button type="submit" (click)="getAbsentStudents()">{{ titre }}</button>
-    </div>
-    <br> <br> 
-    <div class="containerRight"> 
-    
+      <form class="formBlock">
+        <label for="student"><h3>Ajouter un.e absent.e</h3></label>
+        <select id="student" name="student" [(ngModel)]="selectedStudent">
+          <option value="" disabled selected hidden>
+            Sélectionnez une personne
+          </option>
+          <option
+            *ngFor="let student of students; let i = index"
+            [ngValue]="student.prenom"
+          >
+            {{ student.prenom }}
+          </option>
+        </select>
+      </form>
+      <br />
+      <br />
+      <button type="submit" (click)="getAbsentStudents()">{{ titre }}</button>
+     </div>
+    <br />
+    <br />
+    <div class="containerRight">
       <h3>Liste des absents</h3>
-    
-    <ul>
-      <ng-container *ngFor="let student of selectedAbsentStudents">
-        <li *ngIf="getAbsentBoyStudents().includes(student)">
-          <!--  .includes(student)" est une méthode qui permet de vérifier si un élément 
+      <ul>
+        <ng-container *ngFor="let student of selectedAbsentStudents">
+          <li *ngIf="getAbsentBoyStudents().includes(student)">
+            <!--  .includes(student)" est une méthode qui permet de vérifier si un élément 
            est présent dans un tableau.-->
-          {{ student }}
-          <span (click)="removeAbsentStudent(student)"> x </span>
-        </li></ng-container
-      >
-    </ul>
-    <h3>Liste des absentes</h3>
-    <ul>
-    <ng-container *ngFor="let student of selectedAbsentStudents">
-        <li *ngIf="getAbsentGirlStudents().includes(student)">
-          {{ student }}
-          <span class="petitBtn" (click)="removeAbsentStudent(student)"> x </span>
-        </li>
-    </ng-container>
-    </ul>
-  </div> 
+            {{ student }}
+            <span (click)="removeAbsentStudent(student)"> x </span>
+          </li>
+        </ng-container>
+      </ul>
+      <h3>Liste des absentes</h3>
+      <ul>
+        <ng-container *ngFor="let student of selectedAbsentStudents">
+          <li *ngIf="getAbsentGirlStudents().includes(student)">
+            {{ student }}
+            <span class="petitBtn" (click)="removeAbsentStudent(student)">
+              x</span>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
   </div>
-  </section>
-    <!--<ul>
+</section>
+<!-- <ul>
     <li *ngFor= "let student of presentStudents"> {{ student }}</li>
     </ul>
-  </div>
     <button type="submit" (click)="getPresentStudents()">add</button>
-     -->
-  
+  -->
 
-  
-  <!-- button qui efface input: 
+<!-- button qui efface input: 
       ajouter dans ts: myInputValue = ''; // déclaration et initialisation de la propriété
       clearInput(): void { // fonction pour effacer la valeur de la propriété
       this.myInputValue = '';
     }
       <input type="text" [(ngModel)]="myInputValue">
       <button (click)="clearInput()">Effacer</button> -->
-  

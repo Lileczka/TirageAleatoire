@@ -10,6 +10,7 @@
   margin-bottom: 234px;
   text-align: center;
 }
+
 .formBlock {
   margin-top: -500px;
   margin-left: 154px;
@@ -39,6 +40,8 @@ button {
  
 }
 
+
+
 .vertical-line {
   height: 619px;
 
@@ -67,5 +70,4 @@ select {
   margin-top: -400px;
   margin-left: 900px;
   width: 500px;
-  border: 1px solid black;
 }

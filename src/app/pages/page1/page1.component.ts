@@ -2,45 +2,52 @@ import { Component} from '@angular/core';
 import { STUDENTS } from 'src/app/student.mock';
 import { StudentService } from 'src/app/student.service';
 
+
 @Component({
   selector: 'app-page1',
   templateUrl: './page1.component.html',
   styleUrls: ['./page1.component.css']
 })
 export class Page1Component  {
-  students = STUDENTS;
+  students = STUDENTS; //students egal à mock
+ 
   
   titre= '🎰 Sélectionner une personne 🎰';
   
-  cacheMoi:boolean=true
-  visible: boolean=false
-  showStudentList = false;
+  presentMemoryStudents: string[] = [];
+ 
+  selectedStudent!: string ;
+  presentBoyStudents: string[] = [];
+  presentGirlStudents: string[] = [];
+  alreadyDisplayed: boolean = false;
+  studentSelected: boolean = false;
+  constructor(private studentService: StudentService) { }
   
-  presentStudents: string[] = []; 
-  selectedAbsentStudents: string[] = [];
-  presentMemoryStudents : string[] = [];
   
-  
-  constructor(private studentService: StudentService) { 
-    this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
-  }
-  
-  getPresentStudents(): void {
-    this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
-    // Récupérer la chaîne JSON de localStorage avec la clé presentMemoryStudents
-    const presentStudentsJson = localStorage.getItem("presentMemoryStudents");
-  
-    if (presentStudentsJson !== null) {
-      this.presentMemoryStudents = JSON.parse(presentStudentsJson);
-      console.log(this.presentMemoryStudents);
+  getRandomStudent(): void {
+    // Retrieve the presentMemoryStudents list from local storage
+    const presentMemoryStudentsJson = localStorage.getItem("presentMemoryStudents");
+    if (presentMemoryStudentsJson) {
+      this.presentMemoryStudents = JSON.parse(presentMemoryStudentsJson);
     } else {
-      console.log("La valeur de presentMemoryStudents est null");
+      this.presentMemoryStudents = [];
     }
+  
+    // generer un index aléatoire pour selectionner une personne de la liste stocké dans local host
+    const randomIndex = Math.floor(Math.random() * this.presentMemoryStudents.length);
+    this.selectedStudent = this.presentMemoryStudents[randomIndex];
+  
+    // la liste des filles et garçons presents
+    this.presentBoyStudents = this.studentService.getPresentBoylStudents(this.presentMemoryStudents);
+    this.presentGirlStudents = this.studentService.getPresentGirlStudents(this.presentMemoryStudents);
   }
 }
 
-//this.cacheMoi=!this.cacheMoi
-  //this.visible=!this.visible;
+
+
+
+
+
   
 
   

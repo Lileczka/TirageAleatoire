@@ -29,5 +29,22 @@ button {
     margin-left: 308px;
     margin-bottom: 234px;
     text-align: center;
+    padding-top: 10px;
     
+}
+
+p {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+h2 ,.text {
+    padding-top: 100px;
+}
+
+.text {
+    color: black;
+    padding-top: 150px;
+    font-weight: 400px;
+    font-size: 18px;
 }

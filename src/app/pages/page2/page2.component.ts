@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { STUDENTS } from 'src/app/student.mock';
+import {  STUDENTS } from 'src/app/student.mock';
 import { StudentService } from 'src/app/student.service';
+
 @Component({
   selector: 'app-page2',
   templateUrl: './page2.component.html',
@@ -17,28 +18,16 @@ export class Page2Component {
   newAbsentStudents: string[] = []; 
   
 
-  constructor(private studentService: StudentService) {}
+  constructor(private studentService: StudentService) {
+    localStorage.clear();
+  }
   
   getAbsentStudents(): void {
     this.selectedAbsentStudents = this.studentService.getAbsentStudents(this.selectedStudent, this.selectedAbsentStudents);
-    console.log (this.selectedAbsentStudents )
-  }
-  
-  removeAbsentStudent(student: string): void {
-    this.selectedAbsentStudents = this.studentService.removeAbsentStudent(student, this.selectedAbsentStudents);
-    console.log (this.selectedAbsentStudents)
-  }
-  
-  getPresentStudents(): void {
-    this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
-    console.log(this.presentStudents);
-    // Convertir la liste newPresentStudents en chaîne de caractères JSON
-    const presentStudentsJson = JSON.stringify(this.presentStudents);
-    // Stocker la chaîne JSON dans localStorage avec la clé "presentStudents"
-    localStorage.setItem("presentMemoryStudents", presentStudentsJson);
+    console.log ('list des éléves absents' + this.selectedAbsentStudents )
+    this.getPresentStudents();
   }
 
-  
   getAbsentBoyStudents(): string[] {
     if (this.selectedAbsentStudents) {
       this.newAbsentStudents = this.studentService.getAbsentBoyStudents(this.selectedAbsentStudents);
@@ -47,7 +36,7 @@ export class Page2Component {
       return [];
     }
   }
-
+  
   getAbsentGirlStudents(): string[] {
     if (this.selectedAbsentStudents) {
       this.newAbsentStudents = this.studentService.getAbsentGirlStudents(this.selectedAbsentStudents);
@@ -55,6 +44,23 @@ export class Page2Component {
     } else {
       return [];
     }
+  }
+  
+  removeAbsentStudent(student: string): void {
+    this.selectedAbsentStudents = this.studentService.removeAbsentStudent(student, this.selectedAbsentStudents);
+    console.log (this.selectedAbsentStudents)
+   this.getPresentStudents();
+  }
+  
+  getPresentStudents(): void {
+    this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
+    console.log(this.presentStudents);
+    
+    // Convertir la liste newPresentStudents en chaîne de caractères JSON
+    const presentStudentsJson = JSON.stringify(this.presentStudents);
+    // Stocker la chaîne JSON dans localStorage avec la clé "presentStudents"
+    localStorage.setItem("presentMemoryStudents", presentStudentsJson);
+    
   }
 }
   /* 
