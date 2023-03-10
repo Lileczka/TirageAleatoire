@@ -74,7 +74,7 @@ getPresentGirlStudents(newPresentStudents: string[]): string[] {
     return student;
       
     });
-    console.log(presentGirlStudents);
+   
     return presentGirlStudents || [];
   }
 
