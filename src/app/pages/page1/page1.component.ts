@@ -23,7 +23,7 @@ export class Page1Component  {
   
   constructor(private studentService: StudentService) {}
 
-getRandomStudent(): void {
+  getRandomStudent(): void {
     // rechercher la liste dans local storage
     const presentMemoryStudentsJson = localStorage.getItem("presentMemoryStudents");
     if (presentMemoryStudentsJson) {
