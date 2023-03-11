@@ -2,12 +2,12 @@
   <div class="container">
     <button type="button" (click)="getRandomStudent()">{{ titre }}</button>
     <div class="selectionContainer">
-    <h2 *ngIf= "selectedStudent !== null && presentGirlStudents.includes(selectedStudent); else boy">
+    <h2 *ngIf= "presentGirlStudents.includes(selectedStudent); else boy">
       {{ selectedStudent }} 🌸
     <p>tu es la grande gagnante !</p>
     </h2>
     <ng-template #boy>
-      <h2 *ngIf= "selectedStudent !== null && presentBoyStudents.includes(selectedStudent); else neither">
+      <h2 *ngIf= "presentBoyStudents.includes(selectedStudent); else neither">
         {{ selectedStudent }} 🌺 
         <p>tu es le grand gagnant !</p>
       </h2>

@@ -20,11 +20,10 @@ export class Page1Component  {
   presentGirlStudents: string[] = [];
   selectedStudentsList: string[] = [];
   clonedPresentMemoryStudents: string[] = [];
+  
   constructor(private studentService: StudentService) {}
 
- 
-
-  getRandomStudent(): void {
+getRandomStudent(): void {
     // rechercher la liste dans local storage
     const presentMemoryStudentsJson = localStorage.getItem("presentMemoryStudents");
     if (presentMemoryStudentsJson) {
@@ -50,18 +49,19 @@ export class Page1Component  {
       console.log (clonedPresentMemoryStudents[randomIndex]);
  
     
-    // ajouter l'étudiant sélectionné à une nouvelle liste
-    //if (!this.selectedStudentsList.includes(clonedPresentMemoryStudents[randomIndex])) {
-    //  this.selectedStudentsList.push(clonedPresentMemoryStudents[randomIndex]);}
-    //console.log(this.selectedStudentsList);
- // ajouter l'étudiant sélectionné à une nouvelle liste
- this.selectedStudentsList.push(clonedPresentMemoryStudents[randomIndex]);
- console.log(this.selectedStudentsList);
-}
-  
+    //ajouter l'étudiant sélectionné à une nouvelle liste
+    if (!this.selectedStudentsList.includes(clonedPresentMemoryStudents[randomIndex])) {
+    this.selectedStudentsList.push(clonedPresentMemoryStudents[randomIndex]);}
+    console.log(this.selectedStudentsList);
+ 
+     // Vérifier si toutes les étudiants ont été sélectionnées
+     if (this.selectedStudentsList.length === clonedPresentMemoryStudents.length) {
+      alert("Tous les étudiants ont été sélectionnés.");
+    }
     this.presentBoyStudents = this.studentService.getPresentBoylStudents(clonedPresentMemoryStudents);
     this.presentGirlStudents = this.studentService.getPresentGirlStudents(clonedPresentMemoryStudents);
   }
+} 
 }
 
 
