@@ -37,10 +37,11 @@ button {
     border-radius: 50px;
     display: inline-block;
     justify-items: center;
- 
+    margin-left:15px;
 }
-
-
+span {
+padding-left:15px;
+}
 
 .vertical-line {
   height: 619px;
