@@ -58,11 +58,14 @@ export class StudentService {
     return newPresentStudents;
   }
 
-  getPresentBoylStudents(newPresentStudents: string[]): string[] {
+  getPresentBoyStudents(newPresentStudents: string[]): string[] {
     const presentBoyStudents = newPresentStudents.filter(student => {
+      
       return this.students.find(s => s.prenom === student && s.type === 'garçon');
     }).map(student => {
-    return student;
+      console.log('to jest  ' + student);
+      return student;
+    
     });
     return presentBoyStudents || [];
   }
@@ -71,13 +74,15 @@ getPresentGirlStudents(newPresentStudents: string[]): string[] {
     const presentGirlStudents = newPresentStudents.filter(student => {
       return this.students.find(s => s.prenom === student && s.type === 'fille');
     }).map(student => {
+
     return student;
       
     });
    
     return presentGirlStudents || [];
   }
+}
 
   
-}
+
 

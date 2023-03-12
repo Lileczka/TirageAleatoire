@@ -16,7 +16,8 @@ export class Page2Component {
   selectedAbsentStudents: string[] = [];
   presentStudents: string[] = [];
   newAbsentStudents: string[] = []; 
-  
+  presentGirlStudents: string[] = []; 
+  presentBoyStudents: string[] = []; 
 
   constructor(private studentService: StudentService) {
     localStorage.clear();
@@ -25,18 +26,22 @@ export class Page2Component {
   getAbsentStudents(): void {
     this.selectedAbsentStudents = this.studentService.getAbsentStudents(this.selectedStudent, this.selectedAbsentStudents);
     console.log ('list des éléves absents' + this.selectedAbsentStudents )
+    // appeller des methods
     this.getPresentStudents();
+    this.fetchPresentGirlStudents(); 
+    this.fetchPresentBoyStudents(); 
   }
 
   getAbsentBoyStudents(): string[] {
     if (this.selectedAbsentStudents) {
       this.newAbsentStudents = this.studentService.getAbsentBoyStudents(this.selectedAbsentStudents);
+      
       return this.newAbsentStudents;
     } else {
       return [];
     }
   }
-  
+
   getAbsentGirlStudents(): string[] {
     if (this.selectedAbsentStudents) {
       this.newAbsentStudents = this.studentService.getAbsentGirlStudents(this.selectedAbsentStudents);
@@ -54,14 +59,30 @@ export class Page2Component {
   
   getPresentStudents(): void {
     this.presentStudents = this.studentService.getPresentStudents(this.selectedAbsentStudents);
-    console.log(this.presentStudents);
-    
-    // Convertir la liste newPresentStudents en chaîne de caractères JSON
+  // Convertir la liste newPresentStudents en chaîne de caractères JSON
     const presentStudentsJson = JSON.stringify(this.presentStudents);
-    // Stocker la chaîne JSON dans localStorage avec la clé "presentStudents"
+  // Stocker la chaîne JSON dans localStorage avec la clé "presentStudents"
     localStorage.setItem("presentMemoryStudents", presentStudentsJson);
-    
   }
+  
+  //fetch appelle methode getPresentGirlStudents du service  et affecte la valeur retournée 
+
+  fetchPresentGirlStudents(): void  {
+  this.presentGirlStudents = this.studentService.getPresentGirlStudents(this.presentStudents);
+  console.log(this.presentGirlStudents);
+  const  presentGirlStudentsJson = JSON.stringify(this.presentGirlStudents);
+  localStorage.setItem("presentGirlStudents", presentGirlStudentsJson);
+ 
+}
+
+fetchPresentBoyStudents(): void  {
+  this.presentBoyStudents = this.studentService.getPresentBoyStudents(this.presentStudents);
+  console.log(this.presentBoyStudents);
+  const  presentBoyStudentsJson = JSON.stringify(this.presentBoyStudents);
+  localStorage.setItem("presentBoyStudents", presentBoyStudentsJson);
+  
+}
+  
 }
   /* 
   Methodes que je n'utilise plus:

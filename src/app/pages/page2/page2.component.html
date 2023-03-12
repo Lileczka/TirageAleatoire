@@ -10,8 +10,7 @@
           </option>
           <option
             *ngFor="let student of students; let i = index"
-            [ngValue]="student.prenom"
-          >
+            [ngValue]="student.prenom">
             {{ student.prenom }}
           </option>
         </select>
@@ -19,7 +18,7 @@
       <br />
       <br />
       <button type="submit" (click)="getAbsentStudents()">{{ titre }}</button>
-     </div>
+    </div>
     <br />
     <br />
     <div class="containerRight">
@@ -30,7 +29,9 @@
             <!--  .includes(student)" est une méthode qui permet de vérifier si un élément 
            est présent dans un tableau.-->
             {{ student }}
-            <span class="petitBtn" (click)="removeAbsentStudent(student)"> x </span>
+            <span class="petitBtn" (click)="removeAbsentStudent(student)">
+              x
+            </span>
           </li>
         </ng-container>
       </ul>
@@ -40,23 +41,11 @@
           <li *ngIf="getAbsentGirlStudents().includes(student)">
             {{ student }}
             <span class="petitBtn" (click)="removeAbsentStudent(student)">
-              x</span>
+              x</span
+            >
           </li>
         </ng-container>
       </ul>
     </div>
   </div>
 </section>
-<!-- <ul>
-    <li *ngFor= "let student of presentStudents"> {{ student }}</li>
-    </ul>
-    <button type="submit" (click)="getPresentStudents()">add</button>
-  -->
-
-<!-- button qui efface input: 
-      ajouter dans ts: myInputValue = ''; // déclaration et initialisation de la propriété
-      clearInput(): void { // fonction pour effacer la valeur de la propriété
-      this.myInputValue = '';
-    }
-      <input type="text" [(ngModel)]="myInputValue">
-      <button (click)="clearInput()">Effacer</button> -->

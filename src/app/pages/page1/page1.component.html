@@ -2,18 +2,12 @@
   <div class="container">
     <button type="button" (click)="getRandomStudent()">{{ titre }}</button>
     <div class="selectionContainer">
-    <h2 *ngIf= "presentGirlStudents.includes(selectedStudent); else boy">
-      {{ selectedStudent }} 🌸
-    <p>tu es la grande gagnante !</p>
-    </h2>
-    <ng-template #boy>
-      <h2 *ngIf= "presentBoyStudents.includes(selectedStudent); else neither">
-        {{ selectedStudent }} 🌺 
-        <p>tu es le grand gagnant !</p>
+      <h2 *ngIf="!selectedStudent" class="text">
+        Personne n'est sélectionné actuellement 👀
       </h2>
-    </ng-template>
-    <ng-template #neither>
-      <p class="text">Personne n'est sélectionné actuellement 👀</p>
-    </ng-template>
-  </div></div>
+      <div *ngIf="selectedStudent">
+        <div class="text" [innerHTML]="selectedStudent"></div>
+      </div>
+    </div>
+  </div>
 </section>
