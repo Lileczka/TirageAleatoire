@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {  STUDENTS } from 'src/app/student.mock';
 import { StudentService } from 'src/app/student.service';
 
@@ -7,7 +7,7 @@ import { StudentService } from 'src/app/student.service';
   templateUrl: './page2.component.html',
   styleUrls: ['./page2.component.css']
 })
-export class Page2Component {
+export class Page2Component implements OnInit {
   students = STUDENTS; //students egal à mock
   titre= 'Ajouter';
   
@@ -18,9 +18,24 @@ export class Page2Component {
   newAbsentStudents: string[] = []; 
   presentGirlStudents: string[] = []; 
   presentBoyStudents: string[] = []; 
-
-  constructor(private studentService: StudentService) {
-    localStorage.clear();
+  
+  constructor(private studentService: StudentService) {}  
+  
+  //affichage des absents après la réactualisation de la page, hook de cycle de vie 
+  //la méthode est appelée à chaque fois que le composant est initialisé.
+  ngOnInit() {
+    //inicialiser un tableau vide 
+      this.selectedAbsentStudents = [];
+  
+      // recuperer les filles de local storage 
+      const absentGirlStudents = this.getAbsentGirlStudentsFromLocalStorage();
+      this.selectedAbsentStudents.push(...absentGirlStudents);
+  
+      // recuperer les garçons de local storage
+      const absentBoyStudents = this.getAbsentBoyStudentsFromLocalStorage();
+      this.selectedAbsentStudents.push(...absentBoyStudents);
+     
+      this.getPresentStudents();
   }
   
   getAbsentStudents(): void {
@@ -31,20 +46,41 @@ export class Page2Component {
     this.fetchPresentGirlStudents(); 
     this.fetchPresentBoyStudents(); 
   }
+  getAbsentBoyStudentsFromLocalStorage(): string[] {
+    const absentBoyStudentsJSON = localStorage.getItem('absentBoyStudents');
+    
+    if (absentBoyStudentsJSON ) {
+      
+      return JSON.parse(absentBoyStudentsJSON );
+    } else {
+      return [];
+    }
+  }
+  getAbsentGirlStudentsFromLocalStorage(): string[] {
+    const absentGirlStudentsJSON = localStorage.getItem('absentGirlStudents');
+    
+    if (absentGirlStudentsJSON ) {
+      
+      return JSON.parse(absentGirlStudentsJSON );
+      } else {
+      return [];
+    }
+  }
 
   getAbsentBoyStudents(): string[] {
     if (this.selectedAbsentStudents) {
       this.newAbsentStudents = this.studentService.getAbsentBoyStudents(this.selectedAbsentStudents);
-      
+      localStorage.setItem('absentBoyStudents', JSON.stringify(this.newAbsentStudents));
       return this.newAbsentStudents;
     } else {
       return [];
     }
   }
-
+  
   getAbsentGirlStudents(): string[] {
     if (this.selectedAbsentStudents) {
       this.newAbsentStudents = this.studentService.getAbsentGirlStudents(this.selectedAbsentStudents);
+      localStorage.setItem('absentGirlStudents', JSON.stringify(this.newAbsentStudents));
       return this.newAbsentStudents;
     } else {
       return [];

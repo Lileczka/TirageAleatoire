@@ -42,7 +42,8 @@ export class StudentService {
     }).map(student => {
       return student;
     });
-   return absentGirlStudents || [];
+    
+    return absentGirlStudents || [];
   }
 
   removeAbsentStudent(student: string, selectedAbsentStudents: string[]): string[] {
@@ -60,8 +61,7 @@ export class StudentService {
 
   getPresentBoyStudents(newPresentStudents: string[]): string[] {
     const presentBoyStudents = newPresentStudents.filter(student => {
-      
-      return this.students.find(s => s.prenom === student && s.type === 'garçon');
+    return this.students.find(s => s.prenom === student && s.type === 'garçon');
     }).map(student => {
       console.log('to jest  ' + student);
       return student;

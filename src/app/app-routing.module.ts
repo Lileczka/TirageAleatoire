@@ -10,8 +10,9 @@ const routes: Routes = [
   },
   {
     path:'page2', 
-    component: Page2Component
-  }
+    component: Page2Component,
+    //data: { absentGirlStudents: [] }
+    }
 ];
 
 @NgModule({

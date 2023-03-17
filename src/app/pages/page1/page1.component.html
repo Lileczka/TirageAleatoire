@@ -5,6 +5,9 @@
       <h2 *ngIf="!selectedStudent" class="text">
         Personne n'est sélectionné actuellement 👀
       </h2>
+      <!--  <ng-component *ngIf="cacheMoi">
+      <div *ngFor="let student of students">{{student.prenom}}</div>
+      </ng-component> -->
       <div *ngIf="selectedStudent">
         <div class="text" [innerHTML]="selectedStudent"></div>
       </div>
