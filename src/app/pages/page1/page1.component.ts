@@ -38,12 +38,11 @@ export class Page1Component {
     console.log(clonedPresentStudents);
     return clonedPresentStudents;
 }
-/*
-getFullStudentList() {
-  let fullStudentList = mock.STUDENTS.sort(() => Math.random() - 0.5);
- console.log(fullStudentList);
-  return fullStudentList;
-} */
+
+getFullStudentList(): string[] {
+  // trier la liste aléatoirement
+  return this.students.sort(() => Math.random() - 0.5).map(s => s.prenom);
+}
   getRandomStudent(): void {
     //this.showFullList = true;
     let presentStudents = this.clonPresentStudentList();
@@ -51,6 +50,9 @@ getFullStudentList() {
       alert("Il n'y a plus d'étudiant présent");
       return;
     }
+    let students = this.students.map(s => s.prenom);
+    presentStudents = presentStudents.filter(s => students.includes(s));
+
     
     const randomIndex = Math.floor(Math.random() * presentStudents.length);
     // cette variable contienne l'étudiante sélectionnée
@@ -69,6 +71,30 @@ getFullStudentList() {
     const matchingStudent = this.students.find(
       (s) => s.prenom === selectedStudent
     );
+    if (matchingStudent && matchingStudent.type === 'fille') {
+      this.selectedStudent = `<strong>${selectedStudent}</strong> 🌸 <br>Tu es la grande gagnante !`;
+    } else {
+      this.selectedStudent = `<strong>${selectedStudent}</strong> 🌺 <br>Tu es le grand gagnant !`;
+    }
+  }
+  getRandomStudentFull(): void {
+    let fullStudentList = this.getFullStudentList();
+    if (fullStudentList.length === 0) {
+      alert("Il n'y a plus d'étudiant présent");
+      return;
+    }
+    
+    const randomIndex = Math.floor(Math.random() * fullStudentList.length);
+    // cette variable contienne l'étudiante sélectionnée
+    const selectedStudent = fullStudentList[randomIndex];
+
+    // supprime l'étudiant sélectionné de la liste
+    fullStudentList.splice(randomIndex, 1);
+
+    this.selectedStudent = selectedStudent;
+    
+    // Vérifie le genre de l'étudiant sélectionné et affiche un message 
+    const matchingStudent = this.students.find((s) => s.prenom === selectedStudent);
     if (matchingStudent && matchingStudent.type === 'fille') {
       this.selectedStudent = `<strong>${selectedStudent}</strong> 🌸 <br>Tu es la grande gagnante !`;
     } else {

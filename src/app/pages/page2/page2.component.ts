@@ -24,7 +24,7 @@ export class Page2Component implements OnInit {
   //affichage des absents après la réactualisation de la page, hook de cycle de vie 
   //la méthode est appelée à chaque fois que le composant est initialisé.
   ngOnInit() {
-    //inicialiser un tableau vide 
+    //initialiser un tableau vide 
       this.selectedAbsentStudents = [];
   
       // recuperer les filles de local storage 
