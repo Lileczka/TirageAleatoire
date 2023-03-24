@@ -39,10 +39,7 @@ export class Page1Component {
     return clonedPresentStudents;
 }
 
-getFullStudentList(): string[] {
-  // trier la liste aléatoirement
-  return this.students.sort(() => Math.random() - 0.5).map(s => s.prenom);
-}
+
   getRandomStudent(): void {
     //this.showFullList = true;
     let presentStudents = this.clonPresentStudentList();
@@ -50,7 +47,11 @@ getFullStudentList(): string[] {
       alert("Il n'y a plus d'étudiant présent");
       return;
     }
+    //map pour créer un nouveau tableau
     let students = this.students.map(s => s.prenom);
+    // filter pour selectionner uniquement des étudiants present dans l'autre tableau
+    //filtrer les étudiants 
+    //includ si un nom se trouve dans le tableau
     presentStudents = presentStudents.filter(s => students.includes(s));
 
     
@@ -76,6 +77,11 @@ getFullStudentList(): string[] {
     } else {
       this.selectedStudent = `<strong>${selectedStudent}</strong> 🌺 <br>Tu es le grand gagnant !`;
     }
+  }
+  getFullStudentList(): string[] {
+    // trier la liste aléatoirement
+    
+    return this.students.sort(() => Math.random() - 0.5).map(s => s.prenom);
   }
   getRandomStudentFull(): void {
     let fullStudentList = this.getFullStudentList();

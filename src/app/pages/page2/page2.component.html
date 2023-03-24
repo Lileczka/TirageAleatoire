@@ -37,12 +37,11 @@
       </ul>
       <h3>Liste des absentes</h3>
       <ul>
-        <ng-container *ngFor="let student of selectedAbsentStudents">
+        <ng-container *ngFor= "let student of selectedAbsentStudents">
           <li *ngIf="getAbsentGirlStudents().includes(student)">
             {{ student }}
             <span class="petitBtn" (click)="removeAbsentStudent(student)">
-              x</span
-            >
+              x</span>
           </li>
         </ng-container>
       </ul>

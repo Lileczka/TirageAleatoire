@@ -48,6 +48,7 @@ export class StudentService {
 
   removeAbsentStudent(student: string, selectedAbsentStudents: string[]): string[] {
     const newAbsentStudents = selectedAbsentStudents.filter(s => s !== student);
+    console.log('szukam'+newAbsentStudents);
     return newAbsentStudents;
   }
 

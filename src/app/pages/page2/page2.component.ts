@@ -29,7 +29,9 @@ export class Page2Component implements OnInit {
   
       // recuperer les filles de local storage 
       const absentGirlStudents = this.getAbsentGirlStudentsFromLocalStorage();
+      this.selectedAbsentStudents.splice(0, this.selectedAbsentStudents.length);
       this.selectedAbsentStudents.push(...absentGirlStudents);
+      
   
       // recuperer les garçons de local storage
       const absentBoyStudents = this.getAbsentBoyStudentsFromLocalStorage();
@@ -89,7 +91,8 @@ export class Page2Component implements OnInit {
   
   removeAbsentStudent(student: string): void {
     this.selectedAbsentStudents = this.studentService.removeAbsentStudent(student, this.selectedAbsentStudents);
-    console.log (this.selectedAbsentStudents)
+    console.log ('moze tutaj' + this.selectedAbsentStudents)
+    localStorage.clear();
    this.getPresentStudents();
   }
   
